@@ -90,8 +90,10 @@
 			
 			<div id="controller-list" role="navigation">
 				<ul>
-					<li class="controller"><g:link controller="person" action="create">Start as new Person</g:link></li>
+					<li class="controller"><g:link controller="person" action="create">New Person</g:link></li>
+					<li class="controller"><g:link controller="family" action="create">New Family</g:link></li>
 					<li class="controller"><g:link controller="person">Person list</g:link></li>
+					<li class="controller"><g:link controller="family">Family list</g:link></li>
 				</ul>
 			</div>
 		</div>

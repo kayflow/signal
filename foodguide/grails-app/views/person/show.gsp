@@ -53,34 +53,11 @@
 				</li>
 				</g:if>
 				
-				<g:if test="${recommendation?.foodServings}">
 				<li class="fieldcontain">
 					<span id="preferredCategories-label" class="property-label">Daily Recommendation</span><br/>
-					
-							<g:each in="${recommendation?.foodServings}" var="serving">
-								
-								<span class="property-value" aria-labelledby="preferredCategories-label">
-									
-									<ul>
-									<g:each in="${serving.food.foodGroupCategory.foodGroup.directions.sort{it.id}}" var="direction">
-										<li>${direction.statement}</li>								
-									</g:each>
-									</ul>
-								</span>
-								
-								<br/>
-								
-								<span class="property-value" aria-labelledby="preferredCategories-label">
-								
-									>> <b>${serving.servings}</b> servings  ${serving.food.servingSize} of <b>${serving.food.name}</b>
-									
-								</span>
-								
-								<br/>
-							
-							</g:each>
+
+					<g:render template="recommend" model="['recommendation': recommendation]" />
 				</li>
-				</g:if>
 				
 				<g:link action="show" id="${personInstance.id}">[Recommend New]</g:link>
 			

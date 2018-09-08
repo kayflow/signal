@@ -1,12 +1,25 @@
 package sensorup.signal.foodguide
 
-class FoodRecommendation {
-	List<FoodServing> foodServings
-}
-
 class FoodServing {
 	Food food
 	int servings
+}
+
+class FoodRecommendation {
+	List<FoodServing> foodServings
+	
+	Map<FoodGroup, List<FoodServing>> getFoodServingsPerGroup() {
+		foodServings?.groupBy { it.food.foodGroupCategory.foodGroup }
+	}
+}
+
+class FamilyFoodRecommendation extends FoodRecommendation {
+	List<MemberRecommendation> memberRecommendations
+}
+
+class MemberRecommendation {
+	Person member
+	FoodRecommendation recommendation
 }
 
 /**
