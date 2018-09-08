@@ -19,9 +19,7 @@ class PersonController {
 
     def show(Person personInstance) {
 		
-		def preferences = new FoodPreferences(categories: personInstance.preferredCategories)
-		def recommendation = foodRecommendService.recommendFoodServings(
-								personInstance.gender, personInstance.ages, preferences)		
+		def recommendation = foodRecommendService.recommendFoodServings(personInstance)		
 		
         respond personInstance, model:[recommendation: recommendation]
     }

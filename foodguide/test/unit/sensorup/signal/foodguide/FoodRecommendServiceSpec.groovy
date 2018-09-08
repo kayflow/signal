@@ -141,4 +141,24 @@ class FoodRecommendServiceSpec extends Specification {
 				2		| [1]		 || [4]	// ignore unrelated preference
 				2		| [3]		 || [4]
 	}
+	
+	void "recommend food servings for people by summing servings per food"() {
+		given:
+			def pref = [FoodGroupCategory.get(2)] // only 'Food 3'
+			def person1 = new Person(gender: Gender.get(1), ages: AgeGroup.get(1), preferredCategories: pref)
+			def person2 = new Person(gender: Gender.get(2), ages: AgeGroup.get(2), preferredCategories: pref)
+			
+		when:
+			def rec1 = service.recommendFoodServings(person1)
+			def rec2 = service.recommendFoodServings(person2)
+			def rec3 = service.recommendFoodServings([person1, person2])
+		then:
+			[
+				[expected: "[Food 3 #1, Food 4 #6]", rec: rec1],
+				[expected: "[Food 3 #5, Food 4 #9]", rec: rec2],
+				[expected: "[Food 3 #6, Food 4 #15]", rec: rec3]
+			].every {
+				it.expected == it.rec.foodServings.collect {"${it.food} #${it.servings}"}.toString()
+			}
+	}
 }

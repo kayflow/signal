@@ -57,12 +57,12 @@
 				<li class="fieldcontain">
 					<span id="preferredCategories-label" class="property-label">Daily Recommendation</span><br/>
 					
-							<g:each in="${recommendation?.foodServings}" var="serving">
+							<g:each in="${recommendation?.foodServingsPerGroup}" var="grpServings">
 								
 								<span class="property-value" aria-labelledby="preferredCategories-label">
 									
 									<ul>
-									<g:each in="${serving.food.foodGroupCategory.foodGroup.directions.sort{it.id}}" var="direction">
+									<g:each in="${grpServings.key.directions.sort{it.id}}" var="direction">
 										<li>${direction.statement}</li>								
 									</g:each>
 									</ul>
@@ -70,11 +70,11 @@
 								
 								<br/>
 								
-								<span class="property-value" aria-labelledby="preferredCategories-label">
-								
-									>> <b>${serving.servings}</b> servings  ${serving.food.servingSize} of <b>${serving.food.name}</b>
-									
-								</span>
+								<g:each in="${grpServings.value}" var="serving">
+									<span class="property-value" aria-labelledby="preferredCategories-label">
+										>> <b>${serving.servings}</b> servings  ${serving.food.servingSize} of <b>${serving.food.name}</b>
+									</span>
+								</g:each>
 								
 								<br/>
 							
