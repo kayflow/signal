@@ -1,0 +1,6 @@
+### JIRA-3 User Daily Menu
+
+For a user, provide optimal daily menu based on their gender, age, and preferences
+
+1. User creates their profile with gender, age, and preferences
+2. User sees daily menu recommended by food guide data

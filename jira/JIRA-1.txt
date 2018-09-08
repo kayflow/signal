@@ -1,0 +1,3 @@
+### JIRA-1 Create an application skeleton 
+
+For Quick development of business stories, I have created a groovy/grails application for food guide application. Groovy/Grails is agile application framework based on spring/hibernate running on JVM, saves lots of efforts for routine works including basic UI and CRUD. 

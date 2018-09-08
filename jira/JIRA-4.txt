@@ -1,0 +1,6 @@
+### JIRA-4 Family daily menu
+
+User can creates family profile by adding each family member's gender, age, and preferences. Then food guide application will provides optimal daily menu for the family. User can see daily menu per each member.
+
+1. User creates family members with name,gender,age and preferences.
+2. User sees daily menu recommended by food guide data
