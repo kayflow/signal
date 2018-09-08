@@ -16,7 +16,7 @@ class FoodServing {
  * all categories preferred for a food group without explicit preferences.
  */
 class FoodPreferences {
-	List<FoodGroupCategory> categories = []
+	Collection<FoodGroupCategory> categories = []
 	
 	static final NoPreferences = new FoodPreferences(categories: [])
 }

@@ -11,4 +11,9 @@ class Food {
 		name nullable: false	//XXX unique: 'foodGroupCategory' - because some data violate this, so need to check business logic
 		servingSize nullable: false
     }
+	
+	@Override
+	public String toString() {
+		name
+	}
 }

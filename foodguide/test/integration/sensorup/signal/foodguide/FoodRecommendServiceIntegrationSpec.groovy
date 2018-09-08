@@ -26,7 +26,7 @@ class FoodRecommendServiceIntegrationSpec extends IntegrationSpec {
 			def servingsPerDays = foodRecommendService.recommendServings(gender, ages)
 			
 		when:
-			println "=== recommendation for ${gender.name}, ${ages.name}, preferences ${prefs.categories*.name}"
+			println "=== recommendation for ${gender}, ${ages}, preferences ${prefs.categories}"
 		
 			def recommendation = foodRecommendService.recommendFoodServings(gender, ages, prefs)
 			
@@ -34,7 +34,7 @@ class FoodRecommendServiceIntegrationSpec extends IntegrationSpec {
 			servingsPerDays*.foodGroup.fgid as Set == ['vf', 'gr', 'mi', 'me'] as Set
 			
 			servingsPerDays.every { svsPerDay ->
-				println "-- you should eat ${svsPerDay.foodGroup.name} at least ${svsPerDay.minServings} servings"
+				println "-- you should eat ${svsPerDay.foodGroup} at least ${svsPerDay.minServings} servings"
 				
 				def grpServings = recommendation.foodServings.grep {
 					it.food.foodGroupCategory.foodGroup.fgid == svsPerDay.foodGroup.fgid

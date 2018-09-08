@@ -1,4 +1,3 @@
-
 <%@ page import="sensorup.signal.foodguide.Person" %>
 <!DOCTYPE html>
 <html>
@@ -17,7 +16,8 @@
 			</ul>
 		</div>
 		<div id="show-person" class="content scaffold-show" role="main">
-			<h1><g:message code="default.show.label" args="[entityName]" /></h1>
+			<h1>${personInstance?.name}</h1>
+			
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
@@ -40,15 +40,7 @@
 					
 				</li>
 				</g:if>
-			
-				<g:if test="${personInstance?.name}">
-				<li class="fieldcontain">
-					<span id="name-label" class="property-label"><g:message code="person.name.label" default="Name" /></span>
-					
-						<span class="property-value" aria-labelledby="name-label"><g:fieldValue bean="${personInstance}" field="name"/></span>
-					
-				</li>
-				</g:if>
+
 			
 				<g:if test="${personInstance?.preferredCategories}">
 				<li class="fieldcontain">
@@ -60,6 +52,37 @@
 					
 				</li>
 				</g:if>
+				
+				<g:if test="${recommendation?.foodServings}">
+				<li class="fieldcontain">
+					<span id="preferredCategories-label" class="property-label">Daily Recommendation</span><br/>
+					
+							<g:each in="${recommendation?.foodServings}" var="serving">
+								
+								<span class="property-value" aria-labelledby="preferredCategories-label">
+									
+									<ul>
+									<g:each in="${serving.food.foodGroupCategory.foodGroup.directions.sort{it.id}}" var="direction">
+										<li>${direction.statement}</li>								
+									</g:each>
+									</ul>
+								</span>
+								
+								<br/>
+								
+								<span class="property-value" aria-labelledby="preferredCategories-label">
+								
+									>> <b>${serving.servings}</b> servings  ${serving.food.servingSize} of <b>${serving.food.name}</b>
+									
+								</span>
+								
+								<br/>
+							
+							</g:each>
+				</li>
+				</g:if>
+				
+				<g:link action="show" id="${personInstance.id}">[Recommend New]</g:link>
 			
 			</ol>
 			<g:form url="[resource:personInstance, action:'delete']" method="DELETE">

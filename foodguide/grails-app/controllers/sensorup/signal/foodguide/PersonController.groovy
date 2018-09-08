@@ -9,6 +9,8 @@ import grails.transaction.Transactional
 class PersonController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+	
+	FoodRecommendService foodRecommendService
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -16,7 +18,12 @@ class PersonController {
     }
 
     def show(Person personInstance) {
-        respond personInstance
+		
+		def preferences = new FoodPreferences(categories: personInstance.preferredCategories)
+		def recommendation = foodRecommendService.recommendFoodServings(
+								personInstance.gender, personInstance.ages, preferences)		
+		
+        respond personInstance, model:[recommendation: recommendation]
     }
 
     def create() {

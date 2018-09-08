@@ -17,4 +17,9 @@ class ServingsPerDay {
 		minServings min: 1
 		maxServings min: 1
     }
+	
+	@Override
+	public String toString() {
+		"${minServings} - ${maxServings} servings of ${foodGroup} for ${gender}, ${ages} daily"
+	}
 }

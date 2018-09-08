@@ -9,4 +9,9 @@ class DirectionalStatement {
     static constraints = {
 		statement nullable: false
     }
+	
+	@Override
+	public String toString() {
+		statement
+	}
 }

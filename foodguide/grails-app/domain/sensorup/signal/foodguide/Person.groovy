@@ -8,5 +8,11 @@ class Person {
 	static hasMany = [preferredCategories: FoodGroupCategory]
 	
     static constraints = {
+		name nullable: false, unique: true
     }
+	
+	@Override
+	public String toString() {
+		name
+	}
 }
