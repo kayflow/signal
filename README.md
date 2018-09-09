@@ -1,4 +1,4 @@
-Food guilde
+Food guide
 =============
 
 
