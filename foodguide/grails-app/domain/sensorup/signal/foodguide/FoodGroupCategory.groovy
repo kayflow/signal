@@ -14,4 +14,9 @@ class FoodGroupCategory {
 		fgcatid  nullable: false, unique: true
 		name nullable: false
     }
+	
+	@Override
+	public String toString() {
+		"${foodGroup} / ($fgcatid) ${name}"
+	}
 }

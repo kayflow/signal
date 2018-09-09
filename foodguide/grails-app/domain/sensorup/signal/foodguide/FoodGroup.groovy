@@ -14,4 +14,9 @@ class FoodGroup {
 		fgid  nullable: false, unique: true
 		name nullable: false
     }
+	
+	@Override
+	public String toString() {
+		"($fgid) ${name}"
+	}
 }

@@ -1,7 +1,11 @@
 package sensorup.signal.foodguide
 
-class AgeGroup {
+class Person {
 	String name
+	Gender gender
+	AgeGroup ages
+	
+	static hasMany = [preferredCategories: FoodGroupCategory]
 	
     static constraints = {
 		name nullable: false, unique: true

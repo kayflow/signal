@@ -7,6 +7,36 @@ import grails.transaction.Transactional
 @Transactional(readOnly=true)
 class FoodRecommendService {
 
+	FoodRecommendation recommendFoodServings(Person person) {
+		def preferences = new FoodPreferences(categories: person.preferredCategories ?: [])
+		
+		recommendFoodServings(person.gender, person.ages, preferences)
+	}
+	
+	FamilyFoodRecommendation recommendFoodServings(Collection<Person> people) {
+		
+		def memberRecs = people.collect { person -> 
+			new MemberRecommendation(
+				member: person, 
+				recommendation: recommendFoodServings(person))
+		}
+		
+		def foodServingsAggregated = memberRecs.collect { mrec -> 
+			mrec.recommendation.foodServings 
+		}.flatten().groupBy { serving ->
+			serving.food
+		}.collect { grp ->
+			new FoodServing(food: grp.key, servings: grp.value.sum {it.servings})
+		}
+		
+		new FamilyFoodRecommendation(
+			foodServings: foodServingsAggregated, memberRecommendations: memberRecs)
+	}
+	
+	FoodRecommendation recommendFoodServings(Family family) {
+		recommendFoodServings(family.members)
+	}
+	
     FoodRecommendation recommendFoodServings(Gender gender, AgeGroup ages, FoodPreferences preferences) {
 		assert gender
 		assert ages

@@ -23,7 +23,7 @@ class DataLoadService {
 		def file = new File(dataFolder, "foodgroups-en_ONPP.csv")
 		assert file.exists()
 		
-		file.eachLine(0) { line, i ->	// fgid,foodgroup,fgcat_id,fgcat
+		eachLine (file) { line, i ->	// fgid,foodgroup,fgcat_id,fgcat
 			if (i > 0) {
 				def fields = parseLine(line)
 				assert fields.length == 4
@@ -44,7 +44,7 @@ class DataLoadService {
 		def file = new File(dataFolder, "fg_directional_satements-en_ONPP.csv")
 		assert file.exists()
 		
-		file.eachLine(0) { line, i ->	// fgid,directional-statement
+		eachLine (file) { line, i ->	// fgid,directional-statement
 			if (i > 0) {
 				def fields = parseLine(line)
 				assert fields.length == 2
@@ -64,7 +64,7 @@ class DataLoadService {
 		def file = new File(dataFolder, "foods-en_ONPP_rev.csv")
 		assert file.exists()
 		
-		file.eachLine(0) { line, i ->	// fgid, fgcat_id, srvg_sz, food,
+		eachLine (file) { line, i ->	// fgid, fgcat_id, srvg_sz, food,
 			if (i > 0) {
 				def fields = parseLine(line)
 				assert fields.length == 4
@@ -93,7 +93,7 @@ class DataLoadService {
 		
 		def ageGroups = [:]
 		
-		file.eachLine(0) { line, i ->	// fgid,gender,ages,servings
+		eachLine (file) { line, i ->	// fgid,gender,ages,servings
 			if (i > 0) {
 				def fields = parseLine(line)
 				assert fields.length == 4
@@ -113,6 +113,10 @@ class DataLoadService {
 				foodGroup.addToServingsPerDay(servingsPerDay).save(failOnError:true)
 			}
 		}
+	}
+	
+	private eachLine(file, closure) {
+		file.eachLine("Windows-1252", 0, closure)
 	}
 	
 	private def parseIntRange(rangeExpr) {

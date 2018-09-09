@@ -1,14 +1,11 @@
 package sensorup.signal.foodguide
 
-class AgeGroup {
+class Family {
 	String name
+	
+	static hasMany = [members: Person]
 	
     static constraints = {
 		name nullable: false, unique: true
     }
-	
-	@Override
-	public String toString() {
-		name
-	}
 }
